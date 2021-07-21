@@ -8,57 +8,74 @@ class TelaInicial extends StatefulWidget {
 class _TelaInicialState extends State<TelaInicial> {
   @override
   Widget build(BuildContext context) {
+
     return Padding(
-      padding: EdgeInsets.all(25.0),
+      padding: const EdgeInsets.all(100.0),
       child: Column(
-          children: <Widget>[
-            SizedBox(height: 170),
-            RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30)
+            children: <Widget>[
+              SizedBox(height: 170),
+              SizedBox(
+                width: 200.0,
+                height: 60.0,
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)
+                  ),
+
+                  child: Text("Nova Viajem",
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                  ),
+                  color: Colors.greenAccent,
+                  onPressed: (){},
+                ),
               ),
-              child: Text("Nova Viajem",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              SizedBox(height: 80),
+              SizedBox(
+                width: 200.0,
+                height: 60.0,
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  child: Text("Minhas Viagens",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
+                  ),
+                  color: Colors.greenAccent,
+                  onPressed: (){},
+                ),
               ),
-              color: Colors.greenAccent,
-              onPressed: (){},
-              padding: EdgeInsets.symmetric(
-                horizontal: 130.0,
-                vertical: 25.0,
+              SizedBox(height: 80),
+              SizedBox(
+                width: 200.0,
+                height: 60.0,
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  child: Text("Histórico",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
+                  ),
+                  color: Colors.greenAccent,
+                  onPressed: (){},
+                ),
               ),
-            ),
-            SizedBox(height: 80),
-            RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)
-              ),
-              child: Text("Minhas Viagens",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              color: Colors.greenAccent,
-              onPressed: (){},
-              padding: EdgeInsets.symmetric(
-                horizontal: 130.0,
-                vertical: 25.0,
-              ),
-            ),
-            SizedBox(height: 80),
-            RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)
-              ),
-              child: Text("Histórico",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              color: Colors.greenAccent,
-              onPressed: (){},
-              padding: EdgeInsets.symmetric(
-                horizontal: 130.0,
-                vertical: 25.0,
-              ),
-            ),
-          ],
-        ),
+            ],
+          ),
     );
   }
 }

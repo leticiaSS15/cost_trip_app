@@ -12,16 +12,27 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: IconButton(
+                onPressed: (){},
+                icon: Icon(Icons.account_circle),
+              iconSize: 50.0,
+              color: Colors.black,
+            ),
+          ),
           Container(
-            margin: EdgeInsets.only(bottom: 20.0),
+            margin: EdgeInsets.only(top: 100.0, left: 20.0),
             padding: EdgeInsets.symmetric(
               vertical: 50,
               horizontal: 90,
             ),
             child: Text('Bem Vindo',
               style: TextStyle(
-                fontSize: 45,
-                fontFamily: 'Anton',
+                fontFamily: 'Montserrat',
+              fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontSize: 30,
               ),
             ),
           ),
