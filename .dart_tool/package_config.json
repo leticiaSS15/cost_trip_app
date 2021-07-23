@@ -44,6 +44,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dropdown_formfield",
+      "rootUri": "file:///D:/Dev/Flutter%20arq/flutter/.pub-cache/hosted/pub.dartlang.org/dropdown_formfield-0.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///D:/Dev/Flutter%20arq/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0",
       "packageUri": "lib/",
@@ -140,7 +146,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-07-20T22:29:55.801595Z",
+  "generated": "2021-07-23T00:21:17.616894Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

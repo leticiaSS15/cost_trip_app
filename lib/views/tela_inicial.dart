@@ -13,7 +13,7 @@ class _TelaInicialState extends State<TelaInicial> {
       padding: const EdgeInsets.all(100.0),
       child: Column(
             children: <Widget>[
-              SizedBox(height: 170),
+              SizedBox(height: 120),
               SizedBox(
                 width: 200.0,
                 height: 60.0,
@@ -51,7 +51,9 @@ class _TelaInicialState extends State<TelaInicial> {
                     ),
                   ),
                   color: Colors.greenAccent,
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/pagMinhasViagens');
+                  },
                 ),
               ),
               SizedBox(height: 80),
@@ -71,7 +73,9 @@ class _TelaInicialState extends State<TelaInicial> {
                     ),
                   ),
                   color: Colors.greenAccent,
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/pagHistoricoViagem');
+                  },
                 ),
               ),
             ],
