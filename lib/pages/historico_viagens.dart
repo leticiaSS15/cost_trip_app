@@ -13,7 +13,7 @@ class _HistoricoViagensState extends State<HistoricoViagens> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: 'Histórico de Viagens', tamanho_fonte: 20.0, tipo_page: false,),
+          AppBarViagem(name_page: 'Histórico de Viagens', tamanho_fonte: 20.0, exibir_return: true, exibir_perfil: true,),
           Card(
             margin: EdgeInsets.symmetric(
               vertical: 320,

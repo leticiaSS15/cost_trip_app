@@ -17,92 +17,89 @@ class _UsuarioFormState extends State<UsuarioForm> {
   var controller = new TextEditingController();
   final _form = GlobalKey<FormState>();
   final _formData = Map<String, Object>();
-
-/*
-  Future<void> _selectDate(BuildContext context) async {
-    await showDatePicker(
-        context: context,
-        initialDate: now,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101)
-    ).then((pickedDate){
-      if(pickedDate == null){
-        return;
-      }
-      setState(() {
-        date = pickedDate;
-        _formData['data'] = DateFormat('dd/MM/y').format(pickedDate);
-      });
-    });
-  } */
-
- /* void salvar(){
-
-    var isValid = _form.currentState.validate();
-    if(!isValid){
-      return;
-    }
-    _form.currentState.save();
-    _servicoSaida.salvarSaida(_formData);
-  }  */
-
-/*  void dialogConfirmarSalvar(){
-    showDialog(context: context,
-        builder: (_) => AlertDialog(
-          title: Text('Registro salvo com sucesso!'),
-          content: Text('Deseja efetuar mais registros?'),
-          actions: [
-            FlatButton(
-              child: Text('Não'),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-              },
-            ),
-            FlatButton(
-                child: Text('Sim'),
-                onPressed: (){
-                  Navigator.pop(context);
-                  _form.currentState.reset();
-                }
-            ),
-          ],
-        )
-    );
-  } */
+  bool _permissao_cadastro = false;
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-        body: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Form(
-                key: _form,
-                child: ListView(
-                  children: <Widget>[
-                    TextFormField(
-                        decoration: InputDecoration(
-                            labelText: ('Nome ou breve descrição do gasto'),
-                            labelStyle: TextStyle(fontSize: 20),
-                            hintText: 'Ex: Pagamento da escola da Maria',
-                        ),
-                      ),
-                    TextFormField(
-                        enabled: false,
-                        decoration: InputDecoration(
-                            labelText: ('Valor do gasto'),
-                            labelStyle: TextStyle(fontSize: 20),
-                            hintText: 'Ex: 150.00',
-                        ),
-                        keyboardType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                      ),
-                  ],
+      body:SingleChildScrollView(
+        child: Form(
+          key: _form,
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 30.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 5.0),
+                child: TextFormField(
+                  enabled: _permissao_cadastro,
+                  //initialValue: 'ze',
+                  decoration: InputDecoration(
+                    focusColor: Colors.black,
+                      labelText: ('Nome de usuário'),
+                      labelStyle: TextStyle(fontSize: 20),
+                      hintText: 'Ex: Pafuncio_15',
+                      icon: Icon(Icons.perm_identity)),
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 10.0),
+                child: TextFormField(
+                  enabled: _permissao_cadastro,
+                  decoration: InputDecoration(
+                      labelText: ('E-mail'),
+                      labelStyle: TextStyle(fontSize: 20),
+                      hintText: 'Ex: pafuncio@gmail.com',
+                      icon: Icon(Icons.email)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 10.0),
+                child: TextFormField(
+                  enabled: _permissao_cadastro,
+                  decoration: InputDecoration(
+                    focusColor: Colors.green,
+                      labelText: ('Idade'),
+                      labelStyle: TextStyle(fontSize: 20),
+                      hintText: 'Ex: 23 anos',
+                      icon: Icon(Icons.plus_one)),
+                ),
+              ),
+              SizedBox(height: 15.0),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                    onPressed: (){_permissao_cadastro = true;},
+                    child: Text('Atualizar dados', style: TextStyle(color: Colors.black),)
+                ),
+              ),
+              SizedBox(height: 100.0),
+              Text('Possui veículo próprio? Cadastre-o!'),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0, right: 10.0, top: 10.0),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  child: Text("Meus veículos",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                  ),
+                  color: Colors.greenAccent,
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/pagVeiculoCadastrado');
+                  },
+                ),
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 }

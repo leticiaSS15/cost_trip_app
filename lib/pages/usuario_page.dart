@@ -17,9 +17,12 @@ class _UsuarioPageState extends State<UsuarioPage> {
     return Scaffold(
       body: Stack(
           children: <Widget>[
-            AppBarViagem(name_page: 'Meus dados', tamanho_fonte: 30, tipo_page: false),
+            AppBarViagem(name_page: 'Meus dados', tamanho_fonte: 30, exibir_return: true, exibir_perfil: false,),
             SizedBox(height: 100),
-            UsuarioForm()
+            Padding(
+              padding: const EdgeInsets.only(top: 150.0),
+              child: UsuarioForm(),
+            )
           ],
         ),
     );

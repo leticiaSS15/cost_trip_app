@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class AppBarViagem extends StatefulWidget {
   final String name_page;
   final double tamanho_fonte;
-  final bool tipo_page;
+  final bool exibir_return;
+  final bool exibir_perfil;
 
-  const AppBarViagem({Key? key, required this.name_page, required this.tamanho_fonte, required this.tipo_page}) : super(key: key);
+  const AppBarViagem({Key? key, required this.name_page, required this.tamanho_fonte, required this.exibir_return, required this.exibir_perfil}) : super(key: key);
   @override
   _AppBarViagemState createState() => _AppBarViagemState();
 }
@@ -28,7 +29,7 @@ class _AppBarViagemState extends State<AppBarViagem> {
               ),
             ),
           ),
-         Align(
+          if (widget.exibir_perfil) Align(
            alignment: Alignment.topRight,
            child: IconButton(
                 onPressed: (){
@@ -39,11 +40,11 @@ class _AppBarViagemState extends State<AppBarViagem> {
                 color: Colors.black,
               ),
          ),
-          widget.tipo_page ? Center(child: CircularProgressIndicator(),) : Align(
+          if (widget.exibir_return) Align(
             alignment: Alignment.topLeft,
             child: IconButton(
               onPressed: (){
-                Navigator.pushNamed(context, '/');
+                Navigator.pop(context);
               },
               icon: Icon(Icons.arrow_back),
               iconSize: 30.0,

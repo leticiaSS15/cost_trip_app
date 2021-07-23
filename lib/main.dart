@@ -1,10 +1,9 @@
+import 'package:cost_trip/pages/cadastrar_veiculo.dart';
 import 'package:cost_trip/pages/home_page.dart';
-import 'package:cost_trip/pages/login_page.dart';
 import 'package:cost_trip/pages/historico_viagens.dart';
 import 'package:cost_trip/pages/minhas_viagens.dart';
 import 'package:cost_trip/pages/usuario_page.dart';
-import 'package:cost_trip/views/usuario_form.dart';
-import 'package:cost_trip/widgets/card_viagem.dart';
+import 'package:cost_trip/views/veiculo_cadastrado.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,13 +19,15 @@ class MyApp extends StatelessWidget {
       title: 'Cost Trip',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
       initialRoute: '/',
       routes: {
         '/pagMinhasViagens': (context) => MinhaViagem(),
         '/pagHistoricoViagem': (context) => HistoricoViagens(),
         '/pagUsuário': (context) => UsuarioPage(),
+        '/pagCadastroVeiculo': (context) => CadastroVeiculo(),
+        '/pagVeiculoCadastrado': (context) => VeiculoCadastrado(),
       },
       home: HomePage(),
     );

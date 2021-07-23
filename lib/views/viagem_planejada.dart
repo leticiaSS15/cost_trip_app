@@ -14,7 +14,7 @@ class _ViagemPlanejadaState extends State<ViagemPlanejada> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: 'Viagens Planejadas', tamanho_fonte: 18.0, tipo_page: false,),
+          AppBarViagem(name_page: 'Viagens Planejadas', tamanho_fonte: 18.0, exibir_return: true, exibir_perfil: true,),
           Card(
               margin: EdgeInsets.symmetric(
                 vertical: 290,
