@@ -31,7 +31,9 @@ class _TelaInicialState extends State<TelaInicial> {
                   ),
                   ),
                   color: Colors.greenAccent,
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/pagNovaViagem');
+                  },
                 ),
               ),
               SizedBox(height: 80),

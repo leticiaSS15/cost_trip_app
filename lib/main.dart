@@ -2,8 +2,13 @@ import 'package:cost_trip/pages/cadastrar_veiculo.dart';
 import 'package:cost_trip/pages/home_page.dart';
 import 'package:cost_trip/pages/historico_viagens.dart';
 import 'package:cost_trip/pages/minhas_viagens.dart';
+import 'package:cost_trip/pages/nova_viagem.dart';
+import 'package:cost_trip/pages/selecao_acomodacao_viagem.dart';
+import 'package:cost_trip/pages/selecao_transporte_viagem.dart';
 import 'package:cost_trip/pages/usuario_page.dart';
+import 'package:cost_trip/views/transporte_viagem.dart';
 import 'package:cost_trip/views/veiculo_cadastrado.dart';
+import 'package:cost_trip/views/visualizar_viagem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,8 +33,11 @@ class MyApp extends StatelessWidget {
         '/pagUsuário': (context) => UsuarioPage(),
         '/pagCadastroVeiculo': (context) => CadastroVeiculo(),
         '/pagVeiculoCadastrado': (context) => VeiculoCadastrado(),
+        '/pagNovaViagem': (context) => NovaViagem(),
+        '/pagTransporteViagem': (context) => TransporteViagem(),
+        '/pagAcomodacaoViagem': (context) => AcomodacaoViagem(),
       },
-      home: HomePage(),
+      home: VisualizarViagem(),
     );
   }
 }

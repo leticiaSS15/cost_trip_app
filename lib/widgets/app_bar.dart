@@ -36,7 +36,7 @@ class _AppBarViagemState extends State<AppBarViagem> {
                   Navigator.pushNamed(context, '/pagUsuário');
                 },
                 icon: Icon(Icons.account_circle),
-                iconSize: 50.0,
+                iconSize: 40.0,
                 color: Colors.black,
               ),
          ),
@@ -52,7 +52,7 @@ class _AppBarViagemState extends State<AppBarViagem> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 50.0, left: 20.0),
+            margin: EdgeInsets.only(top: 20.0, left: 20.0),
             padding: EdgeInsets.symmetric(
               vertical: 50,
               horizontal: 90,
