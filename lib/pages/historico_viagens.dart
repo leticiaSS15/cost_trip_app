@@ -19,7 +19,7 @@ class _HistoricoViagensState extends State<HistoricoViagens> {
               vertical: 320,
               horizontal: 10,
             ),
-              child: CardViewViagem()
+              child: CardViewViagem(rota: 'historico',)
           ),
         ],
       ),

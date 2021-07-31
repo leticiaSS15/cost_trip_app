@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 class CadastroVeiculoForm extends StatefulWidget {
 
+  final bool edit;
+
+  const CadastroVeiculoForm({Key? key, required this.edit}) : super(key: key);
+
   @override
   _CadastroVeiculoFormState createState() => _CadastroVeiculoFormState();
 }
@@ -26,6 +30,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 5.0),
                 child: TextFormField(
+                  enabled: widget.edit,
                   decoration: InputDecoration(
                       focusColor: Colors.black,
                       labelText: ('Marca'),
@@ -37,6 +42,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 10.0),
                 child: TextFormField(
+                  enabled: widget.edit,
                   decoration: InputDecoration(
                       labelText: ('Ano'),
                       labelStyle: TextStyle(fontSize: 20),
@@ -47,6 +53,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 10.0),
                 child: TextFormField(
+                  enabled: widget.edit,
                   decoration: InputDecoration(
                       focusColor: Colors.green,
                       labelText: ('Capacidade do tanque de combustível'),
@@ -58,6 +65,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 10.0),
                 child: TextFormField(
+                  enabled: widget.edit,
                   decoration: InputDecoration(
                       focusColor: Colors.green,
                       labelText: ('Quilômetros por litro'),
@@ -67,7 +75,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
                 ),
               ),
               SizedBox(height: 50),
-              Row(
+              if (widget.edit) Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),

@@ -20,7 +20,7 @@ class _ViagemCheckinState extends State<ViagemCheckin> {
                 vertical: 290,
                 horizontal: 10,
               ),
-              child: CardViewViagem()
+              child: CardViewViagem(rota: 'checkin',)
           ),
         ],
       ),

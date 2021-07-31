@@ -13,13 +13,13 @@ class _VeiculoCadastradoState extends State<VeiculoCadastrado> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: 'Veìculos cadastrados', tamanho_fonte: 20.0, exibir_return: true, exibir_perfil: false,),
+          AppBarViagem(name_page: 'Veículos cadastrados', tamanho_fonte: 20.0, exibir_return: true, exibir_perfil: false,),
           Card(
               margin: EdgeInsets.symmetric(
                 vertical: 320,
                 horizontal: 10,
               ),
-              child: CardViewViagem()
+              child: CardViewViagem(rota: 'veiculo',)
           ),
           Padding(
             padding: const EdgeInsets.only(left: 100.0, right: 10.0, top: 600.0),

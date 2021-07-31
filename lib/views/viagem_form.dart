@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 
 
 class NovaViagemForm extends StatefulWidget {
@@ -10,8 +12,29 @@ class NovaViagemForm extends StatefulWidget {
 class _NovaViagemFormState extends State<NovaViagemForm> {
 
   final _form = GlobalKey<FormState>();
+  DateTime now = new DateTime.now();
+  DateTime dataIda = DateTime.now();
+  DateTime dataVolta = DateTime.now().add(Duration(days: 7));
   final _formData = Map<String, Object>();
   int _currentStep = 0;
+
+  _showDatePicker(){
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2050),
+    ).then((pickedDate) {
+      if(pickedDate == null){
+        return;
+      }
+      setState(() {
+        dataIda = pickedDate;
+        dataVolta = pickedDate;
+      });
+    }
+    );
+  }
 
 
   @override
@@ -59,8 +82,23 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
         isActive: _currentStep >= 2,
       ),
       Step(
-        title: Text('Datas'),
-        content: ElevatedButton(onPressed: (){}, child: null,),
+        title: Text('Data de ida'),
+        content: ElevatedButton(
+          onPressed: _showDatePicker,
+          child: Text(
+            DateFormat('dd/MM/y').format(dataIda),
+          )
+        ),
+        isActive: _currentStep >= 3,
+      ),
+      Step(
+        title: Text('Data de saída'),
+        content: ElevatedButton(
+            onPressed: _showDatePicker,
+            child: Text(
+              DateFormat('dd/MM/y').format(dataVolta),
+            )
+        ),
         isActive: _currentStep >= 3,
       ),
       Step(

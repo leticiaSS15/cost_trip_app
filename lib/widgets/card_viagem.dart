@@ -1,6 +1,13 @@
+import 'package:cost_trip/pages/cadastrar_veiculo.dart';
+import 'package:cost_trip/pages/visualizar_viagem.dart';
+import 'package:cost_trip/views/cadastro_veiculo_form.dart';
+import 'package:cost_trip/views/view_viagem.dart';
 import 'package:flutter/material.dart';
 
 class CardViewViagem extends StatelessWidget{
+  final String rota;
+
+  const CardViewViagem({Key? key, required this.rota}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +74,13 @@ class CardViewViagem extends StatelessWidget{
               ],
             ),
           ),
-          onTap: (){},
+          onTap: (){
+            if(rota == 'veiculo'){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CadastroVeiculo(edit: false,)));
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarViagem(tela: rota)));
+            }
+          },
         ),
       ),
     );

@@ -20,7 +20,7 @@ class _ViagemPlanejadaState extends State<ViagemPlanejada> {
                 vertical: 290,
                 horizontal: 10,
               ),
-              child: CardViewViagem()
+              child: CardViewViagem(rota: 'visualizar',)
           ),
         ],
       ),

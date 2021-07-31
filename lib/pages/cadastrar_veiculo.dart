@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 
 class CadastroVeiculo extends StatefulWidget {
 
+  final bool edit;
+
+  const CadastroVeiculo({Key? key, required this.edit}) : super(key: key);
+
   @override
   _CadastroVeiculoState createState() => _CadastroVeiculoState();
 }
@@ -21,7 +25,7 @@ class _CadastroVeiculoState extends State<CadastroVeiculo> {
           SizedBox(height: 100),
           Padding(
             padding: const EdgeInsets.only(top: 150.0),
-            child: CadastroVeiculoForm(),
+            child: CadastroVeiculoForm(edit: widget.edit,),
           )
         ],
       ),
