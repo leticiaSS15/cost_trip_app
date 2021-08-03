@@ -108,6 +108,17 @@ class _ViewViagemState extends State<ViewViagem> {
                     icon: Icon(Icons.location_on)),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 100.0, right: 100.0, top: 15.0),
+              child: TextFormField(
+                enabled: _edicao,
+                initialValue: '80,00',
+                decoration: InputDecoration(
+                    focusColor: Colors.black,
+                    labelStyle: TextStyle(fontSize: 20),
+                    icon: Icon(Icons.money_off_sharp)),
+              ),
+            ),
             if(widget.tela == 'historico') Padding(
               padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 30.0),
               child: Row(
@@ -133,7 +144,7 @@ class _ViewViagemState extends State<ViewViagem> {
               ),
             ),
             if(widget.tela == 'visualizar') Padding(
-              padding: const EdgeInsets.only(left: 5.0, right: 10.0, top: 70.0),
+              padding: const EdgeInsets.only(left: 5.0, right: 10.0, top: 20.0),
               child: RaisedButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
@@ -158,6 +169,7 @@ class _ViewViagemState extends State<ViewViagem> {
                     child: TextFormField(
                       enabled: _edicao,
                       decoration: InputDecoration(
+                        labelText: ('Check-in'),
                           labelStyle: TextStyle(fontSize: 20),
                           icon: Icon(Icons.check_circle)),
                     ),
@@ -183,6 +195,7 @@ class _ViewViagemState extends State<ViewViagem> {
                 ],
               ),
             ),
+
           ],
         ),
       ),

@@ -20,7 +20,7 @@ class _VisualizarViagemState extends State<VisualizarViagem> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: "Detalhes da Viagem", tamanho_fonte: 19, exibir_return: true, exibir_perfil: true,),
+          AppBarViagem(name_page: "Detalhes da Viagem", tamanho_fonte: 19, exibir_return: true, exibir_perfil: false,),
           SizedBox(height: 100),
           Padding(
             padding: const EdgeInsets.only(top: 110.0),

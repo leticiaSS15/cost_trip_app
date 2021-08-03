@@ -16,6 +16,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
   var controller = new TextEditingController();
   final _form = GlobalKey<FormState>();
   final _formData = Map<String, Object>();
+  bool _editar = false;
   
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 5.0),
                 child: TextFormField(
-                  enabled: widget.edit,
+                  enabled: _editar,
                   decoration: InputDecoration(
                       focusColor: Colors.black,
                       labelText: ('Marca'),
@@ -42,7 +43,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 10.0),
                 child: TextFormField(
-                  enabled: widget.edit,
+                  enabled: _editar,
                   decoration: InputDecoration(
                       labelText: ('Ano'),
                       labelStyle: TextStyle(fontSize: 20),
@@ -53,7 +54,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 10.0),
                 child: TextFormField(
-                  enabled: widget.edit,
+                  enabled: _editar,
                   decoration: InputDecoration(
                       focusColor: Colors.green,
                       labelText: ('Capacidade do tanque de combustível'),
@@ -65,7 +66,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 10.0),
                 child: TextFormField(
-                  enabled: widget.edit,
+                  enabled: _editar,
                   decoration: InputDecoration(
                       focusColor: Colors.green,
                       labelText: ('Quilômetros por litro'),
@@ -74,7 +75,7 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
                       icon: Icon(Icons.assistant_photo)),
                 ),
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 30),
               if (widget.edit) Row(
                 children: [
                   Padding(
@@ -117,6 +118,17 @@ class _CadastroVeiculoFormState extends State<CadastroVeiculoForm> {
                     ),
                   ),
                 ],
+              ),
+              if (widget.edit == false) Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                    onPressed: (){
+                      setState(() {
+                        _editar = true;
+                      });
+                    },
+                    child: Text('Atualizar veículo', style: TextStyle(color: Colors.black),)
+                ),
               ),
             ],
           ),

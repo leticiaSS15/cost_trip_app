@@ -1,24 +1,26 @@
+import 'package:cost_trip/modelo/viagem.dart';
+import 'package:cost_trip/pages/selecao_transporte_viagem.dart';
+import 'package:cost_trip/views/transporte_viagem.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
-
 class NovaViagemForm extends StatefulWidget {
-
   @override
   _NovaViagemFormState createState() => _NovaViagemFormState();
 }
 
 class _NovaViagemFormState extends State<NovaViagemForm> {
 
-  final _form = GlobalKey<FormState>();
-  DateTime now = new DateTime.now();
   DateTime dataIda = DateTime.now();
   DateTime dataVolta = DateTime.now().add(Duration(days: 7));
-  final _formData = Map<String, Object>();
+  var horaIda = TimeOfDay.now();
+  var horaVolta = TimeOfDay.now();
+  final _form = GlobalKey<FormState>();
+  final _formDataViajem = Map<String, Object>();
   int _currentStep = 0;
 
-  _showDatePicker(){
+
+  _showDatePickerIda(){
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -30,12 +32,71 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
       }
       setState(() {
         dataIda = pickedDate;
-        dataVolta = pickedDate;
+        _formDataViajem['dataIda'] = dataIda;
       });
     }
     );
   }
 
+  _showDatePickerVolta(){
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now().add(Duration(days: 7)),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2050),
+    ).then((pickedDate) {
+      if(pickedDate == null){
+        return;
+      }
+      setState(() {
+        dataVolta = pickedDate;
+        _formDataViajem['dataVolta'] = dataVolta;
+      });
+    }
+    );
+  }
+
+  _selectTimeIda(){
+    showTimePicker(
+        context: context,
+        initialTime: horaIda,
+    ).then((pickedTime) {
+      if(pickedTime == null){
+        return;
+      }
+      setState(() {
+        horaIda = pickedTime;
+        _formDataViajem['horaIda'] = horaIda;
+      });
+    }
+    );
+  }
+
+  _selectTimeVolta(){
+    showTimePicker(
+      context: context,
+      initialTime: horaIda,
+    ).then((pickedTime) {
+      if(pickedTime == null){
+        return;
+      }
+      setState(() {
+        horaVolta = pickedTime;
+        _formDataViajem['horaVolta'] = '$horaVolta';
+      });
+    }
+    );
+  }
+
+  _saveForm(){
+    _form.currentState!.save();
+    print(_formDataViajem['gastos_previstos']);
+    print(_formDataViajem['destino']);
+    print(_formDataViajem['dataIda']);
+    print(_formDataViajem['dataVolta']);
+    print(_formDataViajem['horaIda']);
+    print(_formDataViajem['horaVolta']);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +108,13 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
           steps: _mySteps(),
           currentStep: this._currentStep,
           onStepContinue: (){
+            FocusScope.of(context).requestFocus(new FocusNode());
             setState(() {
               if(this._currentStep < this._mySteps().length - 1){
                 this._currentStep = this._currentStep + 1;
               } else {
-                Navigator.pushNamed(context, '/pagTransporteViagem');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TransporteViagem(formDataViajem: _formDataViajem,)));
+                _saveForm();
               }
             });
           },
@@ -73,43 +136,68 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
     List<Step> _steps = [
       Step(
         title: Text('Teto de gastos'),
-        content: TextField(),
+        content: Padding(
+          padding: const EdgeInsets.only(left: 10.0, right: 20.0),
+          child: TextFormField(
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.number,
+            onSaved: (value) => _formDataViajem['gastos_previstos'] = double.parse(value!),
+            decoration: InputDecoration(
+              icon: Icon(Icons.attach_money_sharp)
+            ),
+          ),
+        ),
         isActive: _currentStep >= 1,
       ),
       Step(
         title: Text('Destino'),
-        content: TextField(),
+        content: Padding(
+          padding: const EdgeInsets.only(left: 10.0, right: 20.0),
+          child: TextFormField(
+            textInputAction: TextInputAction.go,
+            onSaved: (value) => _formDataViajem['destino'] = value!,
+            decoration: InputDecoration(
+                icon: Icon(Icons.map_outlined)
+            ),
+          ),
+        ),
         isActive: _currentStep >= 2,
       ),
       Step(
         title: Text('Data de ida'),
         content: ElevatedButton(
-          onPressed: _showDatePicker,
+          onPressed: _showDatePickerIda,
           child: Text(
-            DateFormat('dd/MM/y').format(dataIda),
+            'Data de ida ${DateFormat('dd/MM/y').format(dataIda)}',
           )
         ),
         isActive: _currentStep >= 3,
       ),
       Step(
-        title: Text('Data de saída'),
+        title: Text('Data de Volta'),
         content: ElevatedButton(
-            onPressed: _showDatePicker,
+            onPressed: _showDatePickerVolta,
             child: Text(
-              DateFormat('dd/MM/y').format(dataVolta),
+              'Data de volta ${DateFormat('dd/MM/y').format(dataVolta)}',
             )
         ),
-        isActive: _currentStep >= 3,
-      ),
-      Step(
-        title: Text('Horário saída'),
-        content: ElevatedButton(onPressed: (){}, child: null,),
         isActive: _currentStep >= 4,
       ),
       Step(
-        title: Text('Horário chegada'),
-        content: ElevatedButton(onPressed: (){}, child: null,),
-        isActive: _currentStep >= 5,
+        title: Text('Horário de ida'),
+        content: ElevatedButton(
+          onPressed: _selectTimeIda,
+          child: Text('Hora de saída ${horaIda.format(context)}')
+        ),
+        isActive: _currentStep >= 5 ,
+      ),
+      Step(
+        title: Text('Horário de volta'),
+        content: ElevatedButton(
+          onPressed: _selectTimeVolta,
+          child: Text('Hora de volta ${horaVolta.format(context)}'),
+        ),
+        isActive: _currentStep >= 6,
       ),
     ];
     return _steps;

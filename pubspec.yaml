@@ -23,7 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  date_range_picker: ^1.0.7
   flutter_datetime_picker: ^1.5.1
   intl: ^0.17.0
 

@@ -70,7 +70,11 @@ class _UsuarioFormState extends State<UsuarioForm> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: TextButton(
-                    onPressed: (){_permissao_cadastro = true;},
+                    onPressed: (){
+                      setState(() {
+                        _permissao_cadastro = true;
+                      });
+                      },
                     child: Text('Atualizar dados', style: TextStyle(color: Colors.black),)
                 ),
               ),

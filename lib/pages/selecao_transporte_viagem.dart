@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 
 class TransporteViagem extends StatefulWidget {
 
+  final Map<String, Object> formDataViajem;
+
+  const TransporteViagem({Key? key, required this.formDataViajem}) : super(key: key);
+
   @override
   _TransporteViagemState createState() => _TransporteViagemState();
 }
@@ -20,7 +24,7 @@ class _TransporteViagemState extends State<TransporteViagem> {
           SizedBox(height: 100),
           Padding(
             padding: const EdgeInsets.only(top: 110.0),
-            child: TransporteForm(),
+            child: TransporteForm(formDataViajem: widget.formDataViajem),
           )
         ],
       ),
