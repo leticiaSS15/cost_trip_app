@@ -1,8 +1,10 @@
+import 'package:cost_trip/modelo/viagem.dart';
 import 'package:cost_trip/pages/cadastrar_veiculo.dart';
 import 'package:cost_trip/pages/visualizar_viagem.dart';
 import 'package:cost_trip/views/cadastro_veiculo_form.dart';
 import 'package:cost_trip/views/view_viagem.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CardViewViagem extends StatelessWidget{
   final String rota;
@@ -11,8 +13,9 @@ class CardViewViagem extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    final Viajem viagem = Provider.of<Viajem>(context, listen: false);
     return Dismissible(
-      key: ValueKey(0),
+      key: ValueKey(viagem.id),
       background: Container(
         color: Theme.of(context).errorColor,
         child: Icon(Icons.delete, color: Colors.white, size: 40),
@@ -54,20 +57,20 @@ class CardViewViagem extends StatelessWidget{
                 Padding(
                   padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
                   child: Row(children: <Widget>[
-                    Text('VIAGEM A NEGOCIOS'),
+                    Text('DESTINO'),
                     Spacer(),
-                    Text('REALIZADA EM:'),
+                    Text('DATA DE IDA:'),
                   ]),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(
                     children: <Widget>[
-                      Text("BRASILIA",
+                      Text("${viagem.destino}",
                         style: new TextStyle(fontSize: 16.0),
                       ),
                       Spacer(),
-                      Text("25/08/2021"),
+                      Text("${viagem.dataIda}"),
                     ],
                   ),
                 ),
@@ -78,7 +81,7 @@ class CardViewViagem extends StatelessWidget{
             if(rota == 'veiculo'){
               Navigator.push(context, MaterialPageRoute(builder: (context) => CadastroVeiculo(edit: false,)));
             } else {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarViagem(tela: rota)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarViagem(tela: rota, viagem: viagem,)));
             }
           },
         ),

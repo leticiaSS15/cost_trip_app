@@ -1,3 +1,4 @@
+import 'package:cost_trip/modelo/transporte.dart';
 import 'package:cost_trip/pages/selecao_acomodacao_viagem.dart';
 import 'package:flutter/material.dart';
 
@@ -14,14 +15,22 @@ class TransporteForm extends StatefulWidget {
 class _TransporteFormState extends State<TransporteForm> {
 
   final _form = GlobalKey<FormState>();
-  final _formDataTransporte = Map<String, Object>();
+  double custo_passagem = 0.0;
+  double seguro_viagem = 0.0;
+  double custo_bagagem = 0.0;
   int _currentStep = 0;
+  late Transporte newTransporte;
 
   _saveForm(){
     _form.currentState!.save();
-    print(_formDataTransporte['custo_passagem']);
-    print(_formDataTransporte['seguro_viajem']);
-    print(_formDataTransporte['custo_bagagem']);
+
+    newTransporte = Transporte(
+        id: '',
+        custo_passagem: custo_passagem,
+        custo_bagagem: custo_bagagem,
+        seguro_viagem: seguro_viagem,
+        total_gastos_transporte: (custo_passagem + custo_bagagem + seguro_viagem) ,
+    );
   }
 
   @override
@@ -40,7 +49,7 @@ class _TransporteFormState extends State<TransporteForm> {
               } else {
                 _saveForm();
                 //Navigator.pushNamed(context, '/pagAcomodacaoViagem');
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AcomodacaoViagem(formDataViajem: widget.formDataViajem, formDataTransporte: _formDataTransporte,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AcomodacaoViagem(formDataViajem: widget.formDataViajem, transporte: newTransporte,)));
               }
             });
           },
@@ -63,7 +72,7 @@ class _TransporteFormState extends State<TransporteForm> {
               TextFormField(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
-                onSaved: (value) => _formDataTransporte['custo_passagem'] = double.parse(value!),
+                onSaved: (value) => custo_passagem = double.parse(value!),
                 decoration: InputDecoration(
                     labelText: ('Custos de passagem'),
                     icon: Icon(Icons.monetization_on)
@@ -73,7 +82,7 @@ class _TransporteFormState extends State<TransporteForm> {
               TextFormField(
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
-                onSaved: (value) => _formDataTransporte['custo_bagagem'] = double.parse(value!),
+                onSaved: (value) => custo_bagagem = double.parse(value!),
                 decoration: InputDecoration(
                     labelText: ('Custos de bagagem'),
                     icon: Icon(Icons.shopping_bag_rounded)
@@ -83,7 +92,7 @@ class _TransporteFormState extends State<TransporteForm> {
               TextFormField(
                 textInputAction: TextInputAction.go,
                 keyboardType: TextInputType.number,
-                onSaved: (value) => _formDataTransporte['seguro_viajem'] = double.parse(value!),
+                onSaved: (value) => seguro_viagem = double.parse(value!),
                 decoration: InputDecoration(
                     labelText: ('Seguro viajem'),
                     icon: Icon(Icons.local_hospital)

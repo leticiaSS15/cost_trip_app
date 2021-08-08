@@ -32,7 +32,7 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
       }
       setState(() {
         dataIda = pickedDate;
-        _formDataViajem['dataIda'] = dataIda;
+        _formDataViajem['dataIda'] = DateFormat('dd/MM/y').format(dataIda);
       });
     }
     );
@@ -50,7 +50,7 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
       }
       setState(() {
         dataVolta = pickedDate;
-        _formDataViajem['dataVolta'] = dataVolta;
+        _formDataViajem['dataVolta'] = DateFormat('dd/MM/y').format(dataVolta);
       });
     }
     );
@@ -66,7 +66,9 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
       }
       setState(() {
         horaIda = pickedTime;
-        _formDataViajem['horaIda'] = horaIda;
+        String _hora = horaIda.hour.toString();
+        String _min = horaIda.minute.toString();
+        _formDataViajem['horaIda'] = _hora + ':' + _min;
       });
     }
     );
@@ -75,20 +77,36 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
   _selectTimeVolta(){
     showTimePicker(
       context: context,
-      initialTime: horaIda,
+      initialTime: TimeOfDay.now(),
     ).then((pickedTime) {
       if(pickedTime == null){
         return;
       }
       setState(() {
         horaVolta = pickedTime;
-        _formDataViajem['horaVolta'] = '$horaVolta';
+        String _hora = horaVolta.hour.toString();
+        String _min = horaVolta.minute.toString();
+        _formDataViajem['horaVolta'] = _hora + ':' + _min;
       });
     }
     );
   }
 
+  void dialogConfirmarSalvar(){
+    showDialog(context: context,
+        builder: (_) => AlertDialog(
+          title: Text('Registro salvo com sucesso!'),
+        )
+    );
+  }
+
   _saveForm(){
+    /*var validate = _form.currentState!.validate();
+
+    if(!validate){
+      dialogConfirmarSalvar();
+    } */
+
     _form.currentState!.save();
     print(_formDataViajem['gastos_previstos']);
     print(_formDataViajem['destino']);

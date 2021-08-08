@@ -1,3 +1,4 @@
+import 'package:cost_trip/modelo/viagem.dart';
 import 'package:cost_trip/widgets/app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,9 @@ import 'package:flutter/material.dart';
 class ViewViagem extends StatefulWidget {
 
   final String tela;
+  final Viajem viagem;
 
-  const ViewViagem({Key? key, required this.tela}) : super(key: key);
+  const ViewViagem({Key? key, required this.tela, required this.viagem}) : super(key: key);
 
   @override
   _ViewViagemState createState() => _ViewViagemState();
@@ -31,7 +33,7 @@ class _ViewViagemState extends State<ViewViagem> {
               padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 5.0),
               child: TextFormField(
                 enabled: _edicao,
-                initialValue: 'ze',
+                initialValue: widget.viagem.destino,
                 decoration: InputDecoration(
                     focusColor: Colors.black,
                     labelStyle: TextStyle(fontSize: 20),
@@ -44,6 +46,7 @@ class _ViewViagemState extends State<ViewViagem> {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      initialValue: widget.viagem.dataIda,
                       enabled: _edicao,
                       decoration: InputDecoration(
                           labelStyle: TextStyle(fontSize: 20),
@@ -53,6 +56,7 @@ class _ViewViagemState extends State<ViewViagem> {
                   Spacer(),
                   Expanded(
                     child: TextFormField(
+                      initialValue: widget.viagem.dataVolta,
                       enabled: _edicao,
                       decoration: InputDecoration(
                           labelStyle: TextStyle(fontSize: 20),
@@ -68,6 +72,7 @@ class _ViewViagemState extends State<ViewViagem> {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      initialValue: widget.viagem.horarioIda,
                       enabled: _edicao,
                       decoration: InputDecoration(
                           labelStyle: TextStyle(fontSize: 20),
@@ -77,6 +82,7 @@ class _ViewViagemState extends State<ViewViagem> {
                   Spacer(),
                   Expanded(
                     child: TextFormField(
+                      initialValue: widget.viagem.horarioVolta,
                       enabled: _edicao,
                       decoration: InputDecoration(
                           labelStyle: TextStyle(fontSize: 20),
@@ -86,11 +92,11 @@ class _ViewViagemState extends State<ViewViagem> {
                 ],
               ),
             ),
-            Padding(
+/*            Padding(
               padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 30.0),
               child: TextFormField(
                 enabled: _edicao,
-                initialValue: 'ze',
+                initialValue: '${widget.viagem.transporte.total_gastos_transporte}',
                 decoration: InputDecoration(
                     focusColor: Colors.black,
                     labelStyle: TextStyle(fontSize: 20),
@@ -101,18 +107,18 @@ class _ViewViagemState extends State<ViewViagem> {
               padding: const EdgeInsets.only(left: 25.0, right: 30.0, top: 30.0),
               child: TextFormField(
                 enabled: _edicao,
-                initialValue: 'ze',
+                initialValue: '${widget.viagem.acomodacao.total_gastos_acomodacao}',
                 decoration: InputDecoration(
                     focusColor: Colors.black,
                     labelStyle: TextStyle(fontSize: 20),
                     icon: Icon(Icons.location_on)),
               ),
-            ),
+            ),*/
             Padding(
               padding: const EdgeInsets.only(left: 100.0, right: 100.0, top: 15.0),
               child: TextFormField(
                 enabled: _edicao,
-                initialValue: '80,00',
+                initialValue: '${widget.viagem.gastos_previstos}',
                 decoration: InputDecoration(
                     focusColor: Colors.black,
                     labelStyle: TextStyle(fontSize: 20),

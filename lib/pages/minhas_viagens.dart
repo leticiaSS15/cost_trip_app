@@ -1,6 +1,8 @@
+import 'package:cost_trip/database/db_viagens.dart';
 import 'package:cost_trip/views/viagem_chekin.dart';
 import 'package:cost_trip/views/viagem_planejada.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MinhaViagem extends StatefulWidget {
 
@@ -9,6 +11,17 @@ class MinhaViagem extends StatefulWidget {
 }
 
 class _MinhaViagemState extends State<MinhaViagem> {
+  bool _isLoading = true;
+
+
+  void initState(){
+    super.initState();
+    Provider.of<DbViagens>(context, listen: false).loadViagem().then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
 
   final List<Widget> pags = [
     Container(
@@ -19,13 +32,12 @@ class _MinhaViagemState extends State<MinhaViagem> {
     )
   ];
 
-  //bool _isLoading = true;
   int currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          body: pags[currentPage],
+          body: _isLoading ? Center(child: CircularProgressIndicator(),) : pags[currentPage],
           bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Colors.indigo,
               selectedItemColor: Colors.white,

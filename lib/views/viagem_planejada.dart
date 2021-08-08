@@ -1,3 +1,4 @@
+import 'package:cost_trip/provider/provider_viagens.dart';
 import 'package:cost_trip/widgets/app_bar.dart';
 import 'package:cost_trip/widgets/card_viagem.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,10 @@ class _ViagemPlanejadaState extends State<ViagemPlanejada> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: 'Viagens Planejadas', tamanho_fonte: 18.0, exibir_return: true, exibir_perfil: true,),
-          Card(
-              margin: EdgeInsets.symmetric(
-                vertical: 290,
-                horizontal: 10,
-              ),
-              child: CardViewViagem(rota: 'visualizar',)
+          AppBarViagem(name_page: 'Viagens Planejadas', tamanho_fonte: 20.0, exibir_return: true, exibir_perfil: true,),
+          Padding(
+            padding: const EdgeInsets.only(top: 200.0, left: 5, right: 5),
+            child: ProviderViagens(rota: 'visualizar'),
           ),
         ],
       ),

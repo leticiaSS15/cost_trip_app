@@ -1,4 +1,8 @@
-class Acomodacao {
+import 'package:flutter/material.dart';
+
+
+class Acomodacao with ChangeNotifier {
+
   final String id;
   final double custo_acomodacao;
   final double custo_estacionamento;

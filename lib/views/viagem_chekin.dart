@@ -1,3 +1,4 @@
+import 'package:cost_trip/provider/provider_viagens.dart';
 import 'package:cost_trip/widgets/app_bar.dart';
 import 'package:cost_trip/widgets/card_viagem.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,9 @@ class _ViagemCheckinState extends State<ViagemCheckin> {
       body: Stack(
         children: <Widget>[
           AppBarViagem(name_page: "Viagens com Check-In", tamanho_fonte: 18.0, exibir_return: true, exibir_perfil: true,),
-          Card(
-              margin: EdgeInsets.symmetric(
-                vertical: 290,
-                horizontal: 10,
-              ),
-              child: CardViewViagem(rota: 'checkin',)
+          Padding(
+            padding: const EdgeInsets.only(top: 200.0, left: 5, right: 5),
+            child: ProviderViagens(rota: 'checkin'),
           ),
         ],
       ),

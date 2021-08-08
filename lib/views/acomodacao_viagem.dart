@@ -1,13 +1,15 @@
 import 'package:cost_trip/modelo/acomodacao.dart';
+import 'package:cost_trip/modelo/transporte.dart';
 import 'package:cost_trip/modelo/viagem.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cost_trip/servico/servico_viagens.dart';
 
 class AcomodacaoForm extends StatefulWidget {
 
-  final Map<String, Object> formDataViajem, formDataTransporte;
+  final Map<String, Object> formDataViajem;
+  final Transporte transporte;
 
-  const AcomodacaoForm({Key? key, required this.formDataViajem, required this.formDataTransporte}) : super(key: key);
+  const AcomodacaoForm({Key? key, required this.formDataViajem, required this.transporte}) : super(key: key);
 
   @override
   _AcomodacaoFormState createState() => _AcomodacaoFormState();
@@ -16,14 +18,26 @@ class AcomodacaoForm extends StatefulWidget {
 class _AcomodacaoFormState extends State<AcomodacaoForm> {
 
   final _form = GlobalKey<FormState>();
-  final _formDataAcomodacao = Map<String, Object>();
+  double custo_acomodacao = 0.0;
+  double custo_estacionamento = 0.0;
+  double seguro_local = 0.0;
   int _currentStep = 0;
+
+  ServicoViagem servico = ServicoViagem();
 
   void _saveForm(){
     _form.currentState!.save();
-    print(_formDataAcomodacao['custo_acomodacao']);
-    print(_formDataAcomodacao['custo_estacionamento']);
-    print(_formDataAcomodacao['seguro_local']);
+
+    final newAcomodacao = Acomodacao(
+      id: '',
+      custo_acomodacao: custo_acomodacao,
+      custo_estacionamento: custo_estacionamento,
+      seguro_local: seguro_local,
+      total_gastos_acomodacao: (custo_acomodacao + custo_estacionamento + seguro_local),
+    );
+
+    servico.salvar(widget.formDataViajem, widget.transporte, newAcomodacao);
+
   }
 
   @override
@@ -65,7 +79,7 @@ class _AcomodacaoFormState extends State<AcomodacaoForm> {
               TextFormField(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
-                onChanged: (value) => _formDataAcomodacao['custo_acomodacao'] = double.parse(value),
+                onChanged: (value) => custo_acomodacao = double.parse(value),
                 decoration: InputDecoration(
                     labelText: ('Custos da acomodação'),
                     icon: Icon(Icons.bedtime)
@@ -75,7 +89,7 @@ class _AcomodacaoFormState extends State<AcomodacaoForm> {
               TextFormField(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
-                onChanged: (value) => _formDataAcomodacao['custo_estacionamento'] = double.parse(value),
+                onChanged: (value) => custo_estacionamento = double.parse(value),
                 decoration: InputDecoration(
                     labelText: ('Custos de estacionamento'),
                     icon: Icon(Icons.car_repair)
@@ -85,7 +99,7 @@ class _AcomodacaoFormState extends State<AcomodacaoForm> {
               TextFormField(
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.go,
-                onChanged: (value) => _formDataAcomodacao['seguro_local'] = double.parse(value),
+                onChanged: (value) => seguro_local = double.parse(value),
                 decoration: InputDecoration(
                     labelText: ('Seguro do local'),
                     icon: Icon(Icons.local_hospital)
