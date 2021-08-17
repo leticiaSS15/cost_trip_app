@@ -1,4 +1,3 @@
-import 'package:cost_trip/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
 
@@ -76,28 +75,6 @@ class _UsuarioFormState extends State<UsuarioForm> {
                       });
                       },
                     child: Text('Atualizar dados', style: TextStyle(color: Colors.black),)
-                ),
-              ),
-              SizedBox(height: 100.0),
-              Text('Possui veículo próprio? Cadastre-o!'),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0, right: 10.0, top: 10.0),
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Text("Meus veículos",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 15,
-                    ),
-                  ),
-                  color: Colors.greenAccent,
-                  onPressed: (){
-                    Navigator.pushNamed(context, '/pagVeiculoCadastrado');
-                  },
                 ),
               ),
             ],

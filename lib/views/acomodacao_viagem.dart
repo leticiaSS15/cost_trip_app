@@ -29,7 +29,7 @@ class _AcomodacaoFormState extends State<AcomodacaoForm> {
     _form.currentState!.save();
 
     final newAcomodacao = Acomodacao(
-      id: '',
+      id_acomodacao: '',
       custo_acomodacao: custo_acomodacao,
       custo_estacionamento: custo_estacionamento,
       seguro_local: seguro_local,
@@ -54,7 +54,7 @@ class _AcomodacaoFormState extends State<AcomodacaoForm> {
               if(this._currentStep < this._mySteps().length - 1){
                 this._currentStep = this._currentStep + 1;
               } else {
-                //Navigator.push(context, '/pagMinhasViagens');
+                //Navigator.pushNamed(context, '/pagMinhasViagens');
                 _saveForm();
               }
             });

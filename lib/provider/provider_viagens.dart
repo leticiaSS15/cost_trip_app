@@ -1,3 +1,4 @@
+import 'package:cost_trip/database/db_acomodacao.dart';
 import 'package:cost_trip/database/db_viagens.dart';
 import 'package:cost_trip/modelo/viagem.dart';
 import 'package:cost_trip/widgets/card_viagem.dart';
@@ -13,7 +14,7 @@ class ProviderViagens extends StatelessWidget{
   Widget build(BuildContext context) {
 
     final viagensProvider = Provider.of<DbViagens>(context);
-    final viagem = viagensProvider.viagens;
+    final viagem = viagensProvider.allViagens;
     return ListView.builder(
       itemCount: viagem.length,
         itemBuilder: (ctx, i) => ChangeNotifierProvider.value(

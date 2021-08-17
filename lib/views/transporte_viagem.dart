@@ -25,7 +25,7 @@ class _TransporteFormState extends State<TransporteForm> {
     _form.currentState!.save();
 
     newTransporte = Transporte(
-        id: '',
+        id_transporte: '',
         custo_passagem: custo_passagem,
         custo_bagagem: custo_bagagem,
         seguro_viagem: seguro_viagem,
@@ -97,11 +97,6 @@ class _TransporteFormState extends State<TransporteForm> {
                     labelText: ('Seguro viajem'),
                     icon: Icon(Icons.local_hospital)
                 ),
-              ),
-              SizedBox(height: 30),
-              ElevatedButton(
-                  onPressed: (){},
-                  child: Text('Utilizar carro próprio')
               ),
             ],
           ),

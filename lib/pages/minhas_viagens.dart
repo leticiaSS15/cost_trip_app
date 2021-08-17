@@ -1,3 +1,4 @@
+import 'package:cost_trip/database/db_acomodacao.dart';
 import 'package:cost_trip/database/db_viagens.dart';
 import 'package:cost_trip/views/viagem_chekin.dart';
 import 'package:cost_trip/views/viagem_planejada.dart';
@@ -21,6 +22,8 @@ class _MinhaViagemState extends State<MinhaViagem> {
         _isLoading = false;
       });
     });
+    print('AQUI È MINHAS VIAGENS');
+    Provider.of<DbAcomodacao>(context, listen: false).loadAllAcomodacao();
   }
 
   final List<Widget> pags = [

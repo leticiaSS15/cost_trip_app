@@ -1,8 +1,10 @@
+import 'package:cost_trip/database/db_acomodacao.dart';
+import 'package:cost_trip/database/db_viagens.dart';
+import 'package:cost_trip/modelo/acomodacao.dart';
 import 'package:cost_trip/modelo/viagem.dart';
-import 'package:cost_trip/pages/cadastrar_veiculo.dart';
 import 'package:cost_trip/pages/visualizar_viagem.dart';
-import 'package:cost_trip/views/cadastro_veiculo_form.dart';
-import 'package:cost_trip/views/view_viagem.dart';
+import 'package:cost_trip/servico/servico_acomodacao_transporte.dart';
+import 'package:cost_trip/views/visualizar_viagem.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,9 +15,9 @@ class CardViewViagem extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    final Viajem viagem = Provider.of<Viajem>(context, listen: false);
+    final Viagem viagem = Provider.of<Viagem>(context, listen: false);
     return Dismissible(
-      key: ValueKey(viagem.id),
+      key: ValueKey(viagem.id_viagem),
       background: Container(
         color: Theme.of(context).errorColor,
         child: Icon(Icons.delete, color: Colors.white, size: 40),
@@ -47,7 +49,9 @@ class CardViewViagem extends StatelessWidget{
             )
         );
       },
-      onDismissed: (_) {},
+      onDismissed: (_) {
+        Provider.of<DbViagens>(context, listen: false).deleteViagem(viagem.id_viagem);
+      },
       child: Card(
         child: InkWell(
           child: Padding(
@@ -78,11 +82,7 @@ class CardViewViagem extends StatelessWidget{
             ),
           ),
           onTap: (){
-            if(rota == 'veiculo'){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CadastroVeiculo(edit: false,)));
-            } else {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarViagem(tela: rota, viagem: viagem,)));
-            }
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ServicoAcoTrans(tela: rota, viagem: viagem)));
           },
         ),
       ),
