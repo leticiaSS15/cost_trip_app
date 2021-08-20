@@ -101,19 +101,7 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
   }
 
   _saveForm(){
-    /*var validate = _form.currentState!.validate();
-
-    if(!validate){
-      dialogConfirmarSalvar();
-    } */
-
     _form.currentState!.save();
-    print(_formDataViajem['gastos_previstos']);
-    print(_formDataViajem['destino']);
-    print(_formDataViajem['dataIda']);
-    print(_formDataViajem['dataVolta']);
-    print(_formDataViajem['horaIda']);
-    print(_formDataViajem['horaVolta']);
   }
 
   @override

@@ -15,6 +15,10 @@ class HistoricoViagens extends StatefulWidget {
 class _HistoricoViagensState extends State<HistoricoViagens> {
   bool _isLoading = true;
 
+  Future<void> _refreshList(BuildContext context) {
+    return Provider.of<DbViagens>(context, listen: false).loadViagem();
+  }
+
   void initState(){
     super.initState();
     Provider.of<DbViagens>(context, listen: false).loadViagem().then((_) {
@@ -27,15 +31,18 @@ class _HistoricoViagensState extends State<HistoricoViagens> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _isLoading ? Center(child: CircularProgressIndicator(),) : Stack(
-        children: <Widget>[
-          AppBarViagem(name_page: 'Histórico de Viagens', tamanho_fonte: 20.0, exibir_return: true, exibir_perfil: true,),
-          Padding(
-            padding: const EdgeInsets.only(top: 200.0, left: 5, right: 5),
-            child: ProviderHistorico(rota: 'historico', checkIN: true),
-          ),
-        ],
+    return RefreshIndicator(
+      onRefresh: () => _refreshList(context),
+      child: Scaffold(
+        body: _isLoading ? Center(child: CircularProgressIndicator(),) : Stack(
+          children: <Widget>[
+            AppBarViagem(name_page: 'Histórico de Viagens', tamanho_fonte: 20.0, exibir_return: true, exibir_perfil: false, rota: '/pagHome',),
+            Padding(
+              padding: const EdgeInsets.only(top: 200.0, left: 5, right: 5),
+              child: ProviderHistorico(rota: 'historico', checkIN: true),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:cost_trip/database/db_acomodacao.dart';
+import 'package:cost_trip/database/db_transporte.dart';
 import 'package:cost_trip/modelo/acomodacao.dart';
 import 'package:cost_trip/modelo/transporte.dart';
 import 'package:cost_trip/modelo/viagem.dart';
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
         create: (_) => DbViagens()),
         ChangeNotifierProvider(
             create: (_) => DbAcomodacao()),
+        ChangeNotifierProvider(
+            create: (_) => DbTransporte()),
       ],
         child: MaterialApp(
           title: 'Cost Trip',
@@ -43,6 +46,7 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: '/',
           routes: {
+            '/pagHome': (context) => HomePage(),
             '/pagMinhasViagens': (context) => MinhaViagem(),
             '/pagHistoricoViagem': (context) => HistoricoViagens(),
             '/pagUsuário': (context) => UsuarioPage(),

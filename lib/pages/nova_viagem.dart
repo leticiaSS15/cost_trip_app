@@ -16,7 +16,7 @@ class _NovaViagemState extends State<NovaViagem> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: "Planejar nova viagem", tamanho_fonte: 19, exibir_return: true, exibir_perfil: false,),
+          AppBarViagem(name_page: "Planejar nova viagem", tamanho_fonte: 19, exibir_return: true, exibir_perfil: false, rota: '/pagHome',),
           SizedBox(height: 100),
           Padding(
             padding: const EdgeInsets.only(top: 110.0),

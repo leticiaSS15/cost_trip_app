@@ -20,7 +20,7 @@ class _TransporteViagemState extends State<TransporteViagem> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: "Selecione o transporte", tamanho_fonte: 18, exibir_return: true, exibir_perfil: false,),
+          AppBarViagem(name_page: "Selecione o transporte", tamanho_fonte: 18, exibir_return: true, exibir_perfil: false, rota: '/pagNovaViagem',),
           SizedBox(height: 100),
           Padding(
             padding: const EdgeInsets.only(top: 110.0),

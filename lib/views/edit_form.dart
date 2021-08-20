@@ -9,8 +9,9 @@ class EditForm extends StatefulWidget {
   final String edit_page;
   final Acomodacao acomodacao;
   final Transporte transporte;
+  final String rota;
 
-  const EditForm({Key? key, required this.edit_page, required this.acomodacao, required this.transporte}) : super(key: key);
+  const EditForm({Key? key, required this.edit_page, required this.acomodacao, required this.transporte, required this.rota}) : super(key: key);
 
   @override
   _EditFormState createState() => _EditFormState();
@@ -36,7 +37,7 @@ class _EditFormState extends State<EditForm> {
         key: _form,
         child: Stack(
           children: <Widget>[
-            AppBarViagem(name_page: widget.edit_page, tamanho_fonte: 25, exibir_return: true, exibir_perfil: false),
+            AppBarViagem(name_page: widget.edit_page, tamanho_fonte: 25, exibir_return: true, exibir_perfil: false, rota: widget.rota,),
             if(widget.edit_page == 'Transporte')Padding(
               padding: const EdgeInsets.only(top: 150.0, left: 20.0, right: 50.0),
               child: Column(

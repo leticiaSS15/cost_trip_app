@@ -48,7 +48,6 @@ class _TransporteFormState extends State<TransporteForm> {
                 this._currentStep = this._currentStep + 1;
               } else {
                 _saveForm();
-                //Navigator.pushNamed(context, '/pagAcomodacaoViagem');
                 Navigator.push(context, MaterialPageRoute(builder: (context) => AcomodacaoViagem(formDataViajem: widget.formDataViajem, transporte: newTransporte,)));
               }
             });

@@ -54,8 +54,9 @@ class _AcomodacaoFormState extends State<AcomodacaoForm> {
               if(this._currentStep < this._mySteps().length - 1){
                 this._currentStep = this._currentStep + 1;
               } else {
-                //Navigator.pushNamed(context, '/pagMinhasViagens');
+                Navigator.pushNamed(context, '/pagHome');
                 _saveForm();
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Viagem cadastrada com sucesso!')));
               }
             });
           },

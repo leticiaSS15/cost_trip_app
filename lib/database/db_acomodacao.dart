@@ -13,7 +13,7 @@ class DbAcomodacao with ChangeNotifier {
 
   List<Acomodacao> get acomodacao => [ ..._acomodacao];
 
-  Acomodacao newAcomodacao = Acomodacao(id_acomodacao: '', custo_acomodacao: 0.0, custo_estacionamento: 0.0, seguro_local: 0.0, total_gastos_acomodacao: 100.0);
+  Acomodacao newAcomodacao = Acomodacao(id_acomodacao: '', custo_acomodacao: 0.0, custo_estacionamento: 0.0, seguro_local: 0.0, total_gastos_acomodacao: 0.0);
 
   int get itemsCount {
     return _acomodacao.length;
@@ -105,13 +105,17 @@ class DbAcomodacao with ChangeNotifier {
     return Future.value();
   }
 
-
   Future<void> deleteAcomodacao(String id) async {
+
+    print(id);
+
     final index = _acomodacao.indexWhere((acomod) => acomod.id_acomodacao == id);
+
+    print('DELETE ACOMODACAO');
 
     if(index >= 0){
       final acomodacao = _acomodacao[index];
-      Uri _editUrl = Uri.parse('https://costtrip-dec61-default-rtdb.firebaseio.com/viagens/${acomodacao.id_acomodacao}.json');
+      Uri _editUrl = Uri.parse('https://costtrip-dec61-default-rtdb.firebaseio.com/acomodacao/${acomodacao.id_acomodacao}.json');
       _acomodacao.remove(acomodacao);
       notifyListeners();
 

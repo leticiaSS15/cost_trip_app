@@ -1,4 +1,5 @@
 import 'package:cost_trip/database/db_acomodacao.dart';
+import 'package:cost_trip/database/db_viagens.dart';
 import 'package:cost_trip/modelo/acomodacao.dart';
 import 'package:cost_trip/modelo/transporte.dart';
 import 'package:cost_trip/modelo/viagem.dart';
@@ -24,21 +25,17 @@ class VisualizarViagem extends StatefulWidget {
 
 class _VisualizarViagemState extends State<VisualizarViagem> {
 
-  final DbAcomodacao _acomodacao = DbAcomodacao();
-  void initState(){
-    super.initState();
-    widget.acomodacao;
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: "Detalhes da Viagem", tamanho_fonte: 19, exibir_return: true, exibir_perfil: false,),
+          AppBarViagem(name_page: "Detalhes da Viagem", tamanho_fonte: 19, exibir_return: true, exibir_perfil: false, rota: '/pagMinhasViagens',),
           SizedBox(height: 100),
           Padding(
             padding: const EdgeInsets.only(top: 110.0),
-            child: ViewViagem(tela: widget.tela, viagem: widget.viagem, acomodacao: widget.acomodacao, transporte: widget.transporte,),
+            child: ViewViagem(tela: widget.tela, viagem: widget.viagem, acomodacao: widget.acomodacao, transporte: widget.transporte),
           )
         ],
       ),

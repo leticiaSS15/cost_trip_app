@@ -5,8 +5,9 @@ class AppBarViagem extends StatefulWidget {
   final double tamanho_fonte;
   final bool exibir_return;
   final bool exibir_perfil;
+  final String rota;
 
-  const AppBarViagem({Key? key, required this.name_page, required this.tamanho_fonte, required this.exibir_return, required this.exibir_perfil}) : super(key: key);
+  const AppBarViagem({Key? key, required this.name_page, required this.tamanho_fonte, required this.exibir_return, required this.exibir_perfil, required this.rota}) : super(key: key);
   @override
   _AppBarViagemState createState() => _AppBarViagemState();
 }
@@ -44,7 +45,7 @@ class _AppBarViagemState extends State<AppBarViagem> {
             alignment: Alignment.topLeft,
             child: IconButton(
               onPressed: (){
-                Navigator.pop(context);
+                Navigator.pushNamed(context, widget.rota);
               },
               icon: Icon(Icons.arrow_back),
               iconSize: 30.0,

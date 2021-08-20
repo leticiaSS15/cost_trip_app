@@ -18,7 +18,7 @@ class _ViagemCheckinState extends State<ViagemCheckin> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: "Viagens com Check-In", tamanho_fonte: 18.0, exibir_return: true, exibir_perfil: true,),
+          AppBarViagem(name_page: "Viagens com Check-In", tamanho_fonte: 18.0, exibir_return: true, exibir_perfil: false, rota: '/pagHome',),
           Padding(
             padding: const EdgeInsets.only(top: 200.0, left: 5, right: 5),
             child: ProviderCheckIN(rota: 'checkin', checkIN: true),

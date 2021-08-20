@@ -1,3 +1,5 @@
+
+
 import 'package:cost_trip/database/db_acomodacao.dart';
 import 'package:cost_trip/database/db_transporte.dart';
 import 'package:cost_trip/database/db_viagens.dart';
@@ -5,6 +7,7 @@ import 'package:cost_trip/modelo/acomodacao.dart';
 import 'package:cost_trip/modelo/transporte.dart';
 import 'package:cost_trip/modelo/viagem.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ServicoViagem with ChangeNotifier {
 
@@ -49,10 +52,36 @@ class ServicoViagem with ChangeNotifier {
         id_acomodacao: id_acomodacao.toString(),
         id_transporte: id_transporte.toString(),
     );
-
-
     _dbViagens.addViagem(newViagem);
 
   }
+
+
+  Future<void> updateViagem(Viagem viagem, Map formEdicao) async {
+
+    final newViagem = Viagem(
+      id_viagem: viagem.id_viagem,
+      destino: formEdicao['destino'],
+      dataIda: formEdicao['dataIda'],
+      dataVolta: formEdicao['dataVolta'],
+      horarioIda: formEdicao['horaIda'],
+      horarioVolta: formEdicao['horaVolta'],
+      gastos_previstos: formEdicao['gastos_previstos'],
+      id_acomodacao: viagem.id_acomodacao,
+      id_transporte: viagem.id_transporte,
+    );
+    await _dbViagens.loadViagem();
+    _dbViagens.updateViagem(newViagem);
+  }
+
+  Future<void> deletarViagem(Viagem viagem, context) async {
+
+    Provider.of<DbViagens>(context, listen: false).deleteViagem(viagem.id_viagem);
+    Provider.of<DbAcomodacao>(context, listen: false).deleteAcomodacao(viagem.id_acomodacao);
+    Provider.of<DbTransporte>(context, listen: false).deleteTransporte(viagem.id_transporte);
+
+  }
+
+
 
 }

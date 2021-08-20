@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          AppBarViagem(name_page: "Bem Vindo!", tamanho_fonte: 30.0, exibir_return: false, exibir_perfil: true,),
+          AppBarViagem(name_page: "Bem Vindo!", tamanho_fonte: 30.0, exibir_return: false, exibir_perfil: true, rota: '',),
           TelaInicial(),
         ],
       ),

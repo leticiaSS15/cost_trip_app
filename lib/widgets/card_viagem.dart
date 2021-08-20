@@ -4,14 +4,23 @@ import 'package:cost_trip/modelo/acomodacao.dart';
 import 'package:cost_trip/modelo/viagem.dart';
 import 'package:cost_trip/pages/visualizar_viagem.dart';
 import 'package:cost_trip/servico/servico_acomodacao_transporte.dart';
+import 'package:cost_trip/servico/servico_viagens.dart';
 import 'package:cost_trip/views/visualizar_viagem.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CardViewViagem extends StatelessWidget{
+class CardViewViagem extends StatefulWidget{
   final String rota;
 
   const CardViewViagem({Key? key, required this.rota}) : super(key: key);
+
+  @override
+  _CardViewViagemState createState() => _CardViewViagemState();
+}
+
+class _CardViewViagemState extends State<CardViewViagem> {
+
+  final ServicoViagem _servicoViagem = ServicoViagem();
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +51,7 @@ class CardViewViagem extends StatelessWidget{
                 FlatButton(
                   child: Text('Sim'),
                   onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Viagem excluída com sucesso!')));
                     Navigator.of(ctx).pop(true);
                   },
                 )
@@ -50,7 +60,8 @@ class CardViewViagem extends StatelessWidget{
         );
       },
       onDismissed: (_) {
-        Provider.of<DbViagens>(context, listen: false).deleteViagem(viagem.id_viagem);
+        _servicoViagem.deletarViagem(viagem, context);
+        //Provider.of<DbViagens>(context, listen: false).deleteViagem(viagem.id_viagem);
       },
       child: Card(
         child: InkWell(
@@ -82,12 +93,10 @@ class CardViewViagem extends StatelessWidget{
             ),
           ),
           onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ServicoAcoTrans(tela: rota, viagem: viagem)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ServicoAcoTrans(tela: widget.rota, viagem: viagem)));
           },
         ),
       ),
     );
   }
-
-
 }

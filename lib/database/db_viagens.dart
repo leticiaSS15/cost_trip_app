@@ -1,9 +1,14 @@
 import 'dart:convert';
+import 'package:cost_trip/database/db_acomodacao.dart';
+import 'package:cost_trip/database/db_transporte.dart';
 import 'package:cost_trip/modelo/viagem.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class DbViagens with ChangeNotifier {
+
+  DbAcomodacao _dbAcomodacao = DbAcomodacao();
+  DbTransporte _dbTransporte = DbTransporte();
 
   Uri _baseUrl = Uri.parse('https://costtrip-dec61-default-rtdb.firebaseio.com/viagens.json');
 
@@ -61,12 +66,16 @@ class DbViagens with ChangeNotifier {
   }
 
   Future<void> updateViagem(Viagem oldViagem) async {
-    if(oldViagem == null || oldViagem.id_viagem == null) {
-      return;
-    }
+
+    print(oldViagem.id_viagem);
+    print(oldViagem.destino);
+    print(_viagens);
 
     final index = _viagens.indexWhere((trip) => trip.id_viagem == oldViagem.id_viagem);
     Uri _editUrl = Uri.parse('https://costtrip-dec61-default-rtdb.firebaseio.com/viagens/${oldViagem.id_viagem}.json');
+
+
+    print(index);
 
     if(index >= 0){
       await http.patch(
@@ -87,6 +96,7 @@ class DbViagens with ChangeNotifier {
       _viagens[index] = oldViagem;
       notifyListeners();
     }
+    notifyListeners();
   }
 
   Future<void> loadViagem() async {
@@ -117,7 +127,10 @@ class DbViagens with ChangeNotifier {
   }
   
   Future<void> deleteViagem(String id) async {
+
     final index = _viagens.indexWhere((trip) => trip.id_viagem == id);
+
+    print('DELETE VIAGEM');
 
     if(index >= 0){
       final viagem = _viagens[index];

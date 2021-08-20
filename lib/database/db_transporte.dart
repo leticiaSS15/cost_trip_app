@@ -69,10 +69,8 @@ class DbTransporte with ChangeNotifier {
 
   Future<void> loadAllTransporte() async {
     final response = await http.get(_baseUrl);
-    //print(json.decode(response.body));
     Map<String, dynamic> dados = json.decode(response.body);
     _transportes.clear();
-    print(json.decode(response.body));
     if(dados != null){
       dados.forEach((viagemId, viagemData) {
         _transportes.add(Transporte(
@@ -111,11 +109,16 @@ class DbTransporte with ChangeNotifier {
 
 
   Future<void> deleteTransporte(String id) async {
+
+    print(id);
+
     final index = _transportes.indexWhere((trans) => trans.id_transporte == id);
+
+    print('DELETE TRANSPORTE');
 
     if(index >= 0){
       final transportes = _transportes[index];
-      Uri _editUrl = Uri.parse('https://costtrip-dec61-default-rtdb.firebaseio.com/viagens/${transportes.id_transporte}.json');
+      Uri _editUrl = Uri.parse('https://costtrip-dec61-default-rtdb.firebaseio.com/transporte/${transportes.id_transporte}.json');
       _transportes.remove(transportes);
       notifyListeners();
 
