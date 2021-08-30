@@ -44,6 +44,7 @@ class _EditFormState extends State<EditForm> {
                 children: [
                   TextFormField(
                     initialValue: widget.transporte.custo_passagem.toString(),
+                    enabled: false,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.number,
                     onSaved: (value) => custo_passagem = double.parse(value!),
@@ -55,6 +56,7 @@ class _EditFormState extends State<EditForm> {
                   SizedBox(height: 20),
                   TextFormField(
                     initialValue: widget.transporte.custo_bagagem.toString(),
+                    enabled: false,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     onSaved: (value) => custo_bagagem = double.parse(value!),
@@ -66,6 +68,7 @@ class _EditFormState extends State<EditForm> {
                   SizedBox(height: 20),
                   TextFormField(
                     initialValue: widget.transporte.seguro_viagem.toString(),
+                    enabled: false,
                     textInputAction: TextInputAction.go,
                     keyboardType: TextInputType.number,
                     onSaved: (value) => seguro_viagem = double.parse(value!),
@@ -83,6 +86,7 @@ class _EditFormState extends State<EditForm> {
                 children: [
                   TextFormField(
                     initialValue: widget.acomodacao.custo_acomodacao.toString(),
+                    enabled: false,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.number,
                     onSaved: (value) => custo_passagem = double.parse(value!),
@@ -94,6 +98,7 @@ class _EditFormState extends State<EditForm> {
                   SizedBox(height: 20),
                   TextFormField(
                     initialValue: widget.acomodacao.custo_estacionamento.toString(),
+                    enabled: false,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     onSaved: (value) => custo_bagagem = double.parse(value!),
@@ -105,6 +110,7 @@ class _EditFormState extends State<EditForm> {
                   SizedBox(height: 20),
                   TextFormField(
                     initialValue: widget.acomodacao.seguro_local.toString(),
+                    enabled: false,
                     textInputAction: TextInputAction.go,
                     keyboardType: TextInputType.number,
                     onSaved: (value) => seguro_viagem = double.parse(value!),

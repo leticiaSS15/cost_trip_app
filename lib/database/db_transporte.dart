@@ -33,10 +33,10 @@ class DbTransporte with ChangeNotifier {
     );
     _transportes.add(Transporte(
       id_transporte: json.decode(response.body)['name'],
-    custo_passagem: newTransporte.custo_passagem,
-    custo_bagagem: newTransporte.custo_bagagem,
-    seguro_viagem: newTransporte.seguro_viagem,
-    total_gastos_transporte: newTransporte.total_gastos_transporte,
+      custo_passagem: newTransporte.custo_passagem,
+      custo_bagagem: newTransporte.custo_bagagem,
+      seguro_viagem: newTransporte.seguro_viagem,
+      total_gastos_transporte: newTransporte.total_gastos_transporte,
     ));
 
     notifyListeners();
@@ -74,11 +74,11 @@ class DbTransporte with ChangeNotifier {
     if(dados != null){
       dados.forEach((viagemId, viagemData) {
         _transportes.add(Transporte(
-            id_transporte: viagemId,
-            custo_passagem: viagemData['custo_passagem'],
-            custo_bagagem: viagemData['custo_bagagem'],
-            seguro_viagem: viagemData['seguro_viagem'],
-            total_gastos_transporte: viagemData['total_gastos_transporte'],
+          id_transporte: viagemId,
+          custo_passagem: viagemData['custo_passagem'],
+          custo_bagagem: viagemData['custo_bagagem'],
+          seguro_viagem: viagemData['seguro_viagem'],
+          total_gastos_transporte: viagemData['total_gastos_transporte'],
         ));
       });
       notifyListeners();

@@ -8,8 +8,9 @@ class AcomodacaoViagem extends StatefulWidget {
 
   final Map<String, Object> formDataViajem;
   final Transporte transporte;
+  final double margemGastos;
 
-  const AcomodacaoViagem({Key? key, required this.formDataViajem, required this.transporte}) : super(key: key);
+  const AcomodacaoViagem({Key? key, required this.formDataViajem, required this.transporte, required this.margemGastos}) : super(key: key);
 
 
   @override
@@ -27,7 +28,7 @@ class _AcomodacaoViagemState extends State<AcomodacaoViagem> {
           SizedBox(height: 100),
           Padding(
             padding: const EdgeInsets.only(top: 110.0),
-            child: AcomodacaoForm(formDataViajem: widget.formDataViajem, transporte: widget.transporte,),
+            child: AcomodacaoForm(formDataViajem: widget.formDataViajem, transporte: widget.transporte, margemGastos: widget.margemGastos,),
           )
         ],
       ),

@@ -41,7 +41,7 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
   _showDatePickerVolta(){
     showDatePicker(
       context: context,
-      initialDate: DateTime.now().add(Duration(days: 7)),
+      initialDate: dataIda.add(Duration(days: 7)),
       firstDate: DateTime(2021),
       lastDate: DateTime(2050),
     ).then((pickedDate) {
@@ -130,6 +130,7 @@ class _NovaViagemFormState extends State<NovaViagemForm> {
                 this._currentStep = this._currentStep - 1;
               } else {
                 this._currentStep  = 0;
+                Navigator.pop(context);
               }
             });
           },

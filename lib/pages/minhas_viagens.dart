@@ -28,9 +28,6 @@ class _MinhaViagemState extends State<MinhaViagem> {
         _isLoading = false;
       });
     });
-    print('AQUI È MINHAS VIAGENS');
-    Provider.of<DbAcomodacao>(context, listen: false).loadAllAcomodacao();
-    Provider.of<DbTransporte>(context, listen: false).loadAllTransporte();
   }
 
   final List<Widget> pags = [

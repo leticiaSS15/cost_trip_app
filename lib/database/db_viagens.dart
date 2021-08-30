@@ -7,9 +7,6 @@ import 'package:http/http.dart' as http;
 
 class DbViagens with ChangeNotifier {
 
-  DbAcomodacao _dbAcomodacao = DbAcomodacao();
-  DbTransporte _dbTransporte = DbTransporte();
-
   Uri _baseUrl = Uri.parse('https://costtrip-dec61-default-rtdb.firebaseio.com/viagens.json');
 
   List<Viagem> _viagens = [];
@@ -35,34 +32,38 @@ class DbViagens with ChangeNotifier {
 
   Future<void> addViagem(Viagem newViagem) async {
     final response = await http.post(
-      _baseUrl,
-      body: json.encode({
-        'destino': newViagem.destino,
-        'dataIda': newViagem.dataIda,
-        'dataVolta': newViagem.dataVolta,
-        'horarioIda': newViagem.horarioIda,
-        'horarioVolta': newViagem.horarioVolta,
-        'check_in': newViagem.check_in,
-        'check_out': newViagem.check_out,
-        'gastos_previstos': newViagem.gastos_previstos,
-        'id_transporte': newViagem.id_transporte,
-        'id_acomodacao': newViagem.id_acomodacao,
-      })
+        _baseUrl,
+        body: json.encode({
+          'destino': newViagem.destino,
+          'dataIda': newViagem.dataIda,
+          'dataVolta': newViagem.dataVolta,
+          'horarioIda': newViagem.horarioIda,
+          'horarioVolta': newViagem.horarioVolta,
+          'roteiro': newViagem.roteiro,
+          'check_in': newViagem.check_in,
+          'check_out': newViagem.check_out,
+          'gastos_previstos': newViagem.gastos_previstos,
+          'gastos_extras': newViagem.gastos_extras,
+          'id_transporte': newViagem.id_transporte,
+          'id_acomodacao': newViagem.id_acomodacao,
+        })
     );
-      _viagens.add(Viagem(
-          id_viagem: json.decode(response.body)['name'],
-          destino: newViagem.destino,
-          dataIda: newViagem.dataIda,
-          dataVolta: newViagem.dataVolta,
-          horarioIda: newViagem.horarioIda,
-          horarioVolta: newViagem.horarioVolta,
-          check_in: newViagem.check_in,
-          check_out: newViagem.check_out,
-          gastos_previstos: newViagem.gastos_previstos,
-          id_transporte: newViagem.id_transporte,
-          id_acomodacao: newViagem.id_acomodacao,
-      ));
-      notifyListeners();
+    _viagens.add(Viagem(
+      id_viagem: json.decode(response.body)['name'],
+      destino: newViagem.destino,
+      dataIda: newViagem.dataIda,
+      dataVolta: newViagem.dataVolta,
+      horarioIda: newViagem.horarioIda,
+      horarioVolta: newViagem.horarioVolta,
+      roteiro: newViagem.roteiro,
+      check_in: newViagem.check_in,
+      check_out: newViagem.check_out,
+      gastos_previstos: newViagem.gastos_previstos,
+      gastos_extras: newViagem.gastos_extras,
+      id_transporte: newViagem.id_transporte,
+      id_acomodacao: newViagem.id_acomodacao,
+    ));
+    notifyListeners();
   }
 
   Future<void> updateViagem(Viagem oldViagem) async {
@@ -91,6 +92,7 @@ class DbViagens with ChangeNotifier {
             'check_in': oldViagem.check_in,
             'check_out': oldViagem.check_out,
             'gastos_previstos': oldViagem.gastos_previstos,
+            'gastos_extras': oldViagem.gastos_extras,
           })
       );
       _viagens[index] = oldViagem;
@@ -114,9 +116,11 @@ class DbViagens with ChangeNotifier {
             dataVolta: viagemData['dataVolta'],
             horarioIda: viagemData['horarioIda'],
             horarioVolta: viagemData['horarioVolta'],
+            roteiro: viagemData['roteiro'],
             check_in: viagemData['check_in'],
             check_out: viagemData['check_out'],
             gastos_previstos: viagemData['gastos_previstos'],
+            gastos_extras: viagemData['gastos_extras'],
             id_transporte: viagemData['id_transporte'].toString(),
             id_acomodacao: viagemData['id_acomodacao'].toString())
         );
@@ -125,7 +129,7 @@ class DbViagens with ChangeNotifier {
     }
     return Future.value();
   }
-  
+
   Future<void> deleteViagem(String id) async {
 
     final index = _viagens.indexWhere((trip) => trip.id_viagem == id);
@@ -184,4 +188,17 @@ class DbViagens with ChangeNotifier {
       viagemCheckOUT.makeChek_out();
     }
   }
+
+  Future<void> addGastosExtras(Viagem gastosExtras, double gastosE) async{
+
+    Uri _baseUrl = Uri.parse('https://costtrip-dec61-default-rtdb.firebaseio.com/viagens/${gastosExtras.id_viagem}.json');
+
+    await http.patch(
+        _baseUrl,
+        body: json.encode({
+          'gastos_extras': gastosE,
+        })
+    );
+  }
+
 }

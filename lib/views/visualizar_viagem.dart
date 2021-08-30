@@ -3,6 +3,7 @@ import 'package:cost_trip/database/db_viagens.dart';
 import 'package:cost_trip/modelo/acomodacao.dart';
 import 'package:cost_trip/modelo/transporte.dart';
 import 'package:cost_trip/modelo/viagem.dart';
+import 'package:cost_trip/pages/despesas_extras.dart';
 import 'package:cost_trip/servico/servico_viagens.dart';
 import 'package:cost_trip/views/edit_form.dart';
 import 'package:cost_trip/widgets/app_bar.dart';
@@ -38,15 +39,38 @@ class _ViewViagemState extends State<ViewViagem> {
   var maskFormatterHour = new MaskTextInputFormatter(mask: '##:##', filter: { "#": RegExp(r'[0-9]') });
   String rota = '';
 
-
-
   _saveForm(){
     _form.currentState!.save();
     servicoViagem.updateViagem(widget.viagem, formEdicao);
-
   }
 
-
+  _pesqSatisfacao(){
+     return showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('Sobre a sua viagem'),
+          content: Text('Os gastos se mantiveram dentro planejado?'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.thumb_up, size: 25),
+              onPressed: () {
+                servicoViagem.pesqSatisfacao(true);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Obrigada por sua opnião!')));
+                Navigator.pushNamed(context, '/pagMinhasViagens');
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.thumb_down, size: 25),
+              onPressed: () {
+                servicoViagem.pesqSatisfacao(false);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Obrigada por sua opnião!')));
+                Navigator.pushNamed(context, '/pagMinhasViagens');
+              },
+            )
+          ],
+        )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +80,8 @@ class _ViewViagemState extends State<ViewViagem> {
     } else if (widget.tela == 'visualizar'){
       rota = '/pagMinhasViagens';
     }
+
+    var restanteOrcamento = widget.viagem.gastos_previstos - (widget.transporte.total_gastos_transporte + widget.acomodacao.total_gastos_acomodacao);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -215,7 +241,7 @@ class _ViewViagemState extends State<ViewViagem> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                        initialValue: widget.viagem.gastos_previstos.toString(),
+                        initialValue: (widget.viagem.gastos_previstos + widget.viagem.gastos_extras).toString(),
                         enabled: _edicao,
                         keyboardType: TextInputType.number,
                         onSaved: (value) => formEdicao['gastos_previstos'] = double.parse(value!),
@@ -284,7 +310,7 @@ class _ViewViagemState extends State<ViewViagem> {
                         color: Colors.greenAccent,
                         onPressed: (){
                           viagens.makeChek_in(widget.viagem);
-                          Navigator.pushNamed(context, '/pagMinhasViagens');
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => DespesasExtras(viagem: widget.viagem, restanteOrcamento: restanteOrcamento,)));
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Check-in realizado com sucesso, Boa viagem!!')));
                         },
                       ),
@@ -344,7 +370,7 @@ class _ViewViagemState extends State<ViewViagem> {
                         ),
                         color: Colors.greenAccent,
                         onPressed: (){
-                          Navigator.pushNamed(context, '/pagMinhasViagens');
+                          _pesqSatisfacao();
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Check-out realizado com sucesso!')));
                           viagens.makeChek_out(widget.viagem);
                         },

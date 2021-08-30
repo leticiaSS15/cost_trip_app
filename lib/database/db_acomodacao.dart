@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cost_trip/auth/db_auth.dart';
 import 'package:cost_trip/modelo/acomodacao.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -66,7 +67,6 @@ class DbAcomodacao with ChangeNotifier {
   }
 
   Future<void> loadAcomodacao(String idAcomodacao) async {
-
     final response = await http.get(_baseUrl);
     Map<String, dynamic> dados = json.decode(response.body);
     _acomodacao.clear();
@@ -130,3 +130,4 @@ class DbAcomodacao with ChangeNotifier {
 
 
 }
+

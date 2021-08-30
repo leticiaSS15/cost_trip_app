@@ -2,9 +2,11 @@ import 'package:cost_trip/database/db_acomodacao.dart';
 import 'package:cost_trip/database/db_viagens.dart';
 import 'package:cost_trip/modelo/acomodacao.dart';
 import 'package:cost_trip/modelo/viagem.dart';
+import 'package:cost_trip/pages/roteiro_viagem.dart';
 import 'package:cost_trip/pages/visualizar_viagem.dart';
 import 'package:cost_trip/servico/servico_acomodacao_transporte.dart';
 import 'package:cost_trip/servico/servico_viagens.dart';
+import 'package:cost_trip/views/visualizar_roteiro.dart';
 import 'package:cost_trip/views/visualizar_viagem.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +63,6 @@ class _CardViewViagemState extends State<CardViewViagem> {
       },
       onDismissed: (_) {
         _servicoViagem.deletarViagem(viagem, context);
-        //Provider.of<DbViagens>(context, listen: false).deleteViagem(viagem.id_viagem);
       },
       child: Card(
         child: InkWell(
@@ -94,6 +95,9 @@ class _CardViewViagemState extends State<CardViewViagem> {
           ),
           onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => ServicoAcoTrans(tela: widget.rota, viagem: viagem)));
+          },
+          onLongPress: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ViewRoteiro(viagem: viagem)));
           },
         ),
       ),

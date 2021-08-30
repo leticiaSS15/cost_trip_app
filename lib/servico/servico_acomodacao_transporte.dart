@@ -24,8 +24,6 @@ class ServicoAcoTrans extends StatefulWidget {
 
 class _ServicoAcoTransState extends State<ServicoAcoTrans> {
 
-
-  DbViagens _dbViagens = DbViagens();
   DbAcomodacao _dbAcomodacao = DbAcomodacao();
   DbTransporte _dbTransporte = DbTransporte();
   Acomodacao newAcomodacao = Acomodacao(id_acomodacao: '', custo_acomodacao: 0.0, custo_estacionamento: 0.0, seguro_local: 0.0, total_gastos_acomodacao: 0.0);
@@ -35,15 +33,15 @@ class _ServicoAcoTransState extends State<ServicoAcoTrans> {
 
 
   Acomodacao loadAco() {
-     _dbAcomodacao.loadAcomodacao(widget.viagem.id_acomodacao);
-     var acomodacao;
-    return acomodacao = _dbAcomodacao.newAcomodacao;
+    _dbAcomodacao.loadAcomodacao(widget.viagem.id_acomodacao);
+    var acomodacao = _dbAcomodacao.newAcomodacao;
+    return acomodacao ;
   }
 
   Transporte loadTrasn(){
     _dbTransporte.loadTransporte(widget.viagem.id_transporte);
-    var transporte;
-    return transporte = _dbTransporte.newTransporte;
+    var transporte = _dbTransporte.newTransporte;
+    return transporte ;
   }
 
   @override
@@ -62,7 +60,6 @@ class _ServicoAcoTransState extends State<ServicoAcoTrans> {
         _isLoading = false;
       });
     }
-
     return Stack(
         children: <Widget> [
           AppBarViagem(name_page: "Detalhes da Viagem", tamanho_fonte: 19, exibir_return: true, exibir_perfil: false, rota: '/pagMinhasViagens',),

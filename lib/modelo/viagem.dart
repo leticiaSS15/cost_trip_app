@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'package:cost_trip/modelo/acomodacao.dart';
-import 'package:cost_trip/modelo/transporte.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,9 +11,11 @@ class Viagem with ChangeNotifier {
   final String horarioVolta;
   final String id_transporte;
   final String id_acomodacao;
+  final String roteiro;
   bool check_in;
   bool check_out;
   final double gastos_previstos;
+  final double gastos_extras;
 
   Viagem({
     required this.id_viagem,
@@ -26,11 +24,14 @@ class Viagem with ChangeNotifier {
     required this.dataVolta,
     required this.horarioIda,
     required this.horarioVolta,
+    required this.roteiro,
     required this.id_transporte,
     required this.id_acomodacao,
     this.check_in = false,
     this.check_out = false,
-    required this.gastos_previstos});
+    required this.gastos_previstos,
+    required this.gastos_extras
+  });
 
   void makeChek_in(){
     check_in = !check_in;

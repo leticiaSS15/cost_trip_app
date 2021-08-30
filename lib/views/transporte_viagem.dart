@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cost_trip/modelo/transporte.dart';
 import 'package:cost_trip/pages/selecao_acomodacao_viagem.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +20,12 @@ class _TransporteFormState extends State<TransporteForm> {
   double custo_passagem = 0.0;
   double seguro_viagem = 0.0;
   double custo_bagagem = 0.0;
+  double margemGastos = 0.0;
   int _currentStep = 0;
   late Transporte newTransporte;
 
   _saveForm(){
     _form.currentState!.save();
-
     newTransporte = Transporte(
         id_transporte: '',
         custo_passagem: custo_passagem,
@@ -31,30 +33,44 @@ class _TransporteFormState extends State<TransporteForm> {
         seguro_viagem: seguro_viagem,
         total_gastos_transporte: (custo_passagem + custo_bagagem + seguro_viagem) ,
     );
+    margemGastos = margemGastos - (custo_passagem + custo_bagagem + seguro_viagem);
   }
 
   @override
   Widget build(BuildContext context) {
+    double orcamento = double.parse(widget.formDataViajem['gastos_previstos'].toString());
+    margemGastos = orcamento;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body:Form(
         key: _form,
-        child: Stepper(
-          steps: _mySteps(),
-          currentStep: this._currentStep,
-          onStepContinue: (){
-            setState(() {
-              if(this._currentStep < this._mySteps().length - 1){
-                this._currentStep = this._currentStep + 1;
-              } else {
-                _saveForm();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AcomodacaoViagem(formDataViajem: widget.formDataViajem, transporte: newTransporte,)));
-              }
-            });
-          },
-          onStepCancel: (){
-            Navigator.pop(context, '/pagNovaViagem');
-          },
+        child: Stack(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 120.0, top: 10.0),
+              child: Text("Saldo disponível ${margemGastos.toString()}", style: TextStyle(fontSize: 15)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: Stepper(
+              steps: _mySteps(),
+              currentStep: this._currentStep,
+              onStepContinue: (){
+                setState(() {
+                  if(this._currentStep < this._mySteps().length - 1){
+                    this._currentStep = this._currentStep + 1;
+                  } else {
+                    _saveForm();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AcomodacaoViagem(formDataViajem: widget.formDataViajem, transporte: newTransporte, margemGastos: margemGastos,)));
+                  }
+                });
+              },
+              onStepCancel: (){
+                Navigator.pop(context, '/pagNovaViagem');
+              },
+          ),
+            ),
+      ]
         ),
       ),
     );
